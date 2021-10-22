@@ -16,10 +16,10 @@ base64 = "0.13"
 hyper = "0.14"
 reqwest = { version = "0.11", default-features = false, features = ["rustls-tls", "json"] }
 openssl = "0.10"
-tokio = { version = "1.0", features = [ "time", "fs" ] }
+tokio = { version = "1.12", features = [ "time", "fs" ] }
 tracing = "0.1"
 tracing-futures = "0.2"
-thiserror = "1.0.24"
+thiserror = "1.0.30"
 
 [dev-dependencies]
-tokio = { version = "1.0", features = ["rt-multi-thread", "macros"] }
+tokio = { version = "1.12", features = ["rt-multi-thread", "macros"] }
