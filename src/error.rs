@@ -1,4 +1,5 @@
 use serde::Deserialize;
+use serde::Serialize;
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -51,7 +52,7 @@ impl From<openssl::error::ErrorStack> for Error {
 }
 
 /// The result of an operation that can return a [`ServerError`].
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", untagged)]
 pub enum ServerResult<T> {
   Ok(T),
@@ -67,7 +68,7 @@ impl<T> From<ServerResult<T>> for Result<T, Error> {
   }
 }
 /// This is an error as returned by the ACME server.
-#[derive(Deserialize, Debug, Clone, thiserror::Error)]
+#[derive(Serialize, Deserialize, Debug, Clone, thiserror::Error)]
 #[serde(rename_all = "camelCase")]
 #[error("ServerError({}): {}: {}", r#type.clone().unwrap_or_default(), title.clone().unwrap_or_default(), detail.clone().unwrap_or_default())]
 pub struct ServerError {

@@ -74,7 +74,7 @@ impl DirectoryBuilder {
 /// A directory is the resource representing how to reach an ACME server.
 ///
 /// Must be created through a [`DirectoryBuilder`].
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Directory {
   #[serde(skip)]
@@ -100,7 +100,7 @@ pub struct Directory {
 /// This is some metadata about a directory.
 ///
 /// Directories are not required to provide this information.
-#[derive(Deserialize, Clone, Debug)]
+#[derive(Deserialize, Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DirectoryMeta {
   pub terms_of_service: Option<String>,

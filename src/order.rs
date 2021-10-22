@@ -10,6 +10,7 @@ use openssl::x509::X509Name;
 use openssl::x509::X509Req;
 use openssl::x509::X509;
 use serde::Deserialize;
+use serde::Serialize;
 use serde_json::json;
 use std::sync::Arc;
 use std::time::Duration;
@@ -22,7 +23,7 @@ use tracing::Span;
 /// The status of this order.
 ///
 /// Possible values are "pending", "ready", processing", "valid", and "invalid".
-#[derive(Deserialize, Debug, Eq, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub enum OrderStatus {
   Pending,
@@ -37,7 +38,7 @@ pub enum OrderStatus {
 /// issuance.
 ///
 /// This must be created through an [`OrderBuilder`].
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Order {
   #[serde(skip)]

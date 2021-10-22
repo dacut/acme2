@@ -4,6 +4,7 @@ use crate::helpers::*;
 use openssl::pkey::PKey;
 use openssl::pkey::Private;
 use serde::Deserialize;
+use serde::Serialize;
 use serde_json::json;
 use std::sync::Arc;
 use tracing::field;
@@ -17,7 +18,7 @@ use tracing::Span;
 /// and "revoked". The value "deactivated" should be used to indicate client-
 /// initiated deactivation whereas "revoked" should be used to indicate server-
 /// initiated deactivation.
-#[derive(Deserialize, Eq, PartialEq, Debug, Clone)]
+#[derive(Serialize, Deserialize, Eq, PartialEq, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub enum AccountStatus {
   Valid,
@@ -28,7 +29,7 @@ pub enum AccountStatus {
 /// An ACME account. This is used to identify a subscriber to an ACME server.
 ///
 /// This resource should be created through an [`AccountBuilder`].
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Account {
   #[serde(skip)]

@@ -7,6 +7,7 @@ use crate::order::Order;
 use openssl::hash::hash;
 use openssl::hash::MessageDigest;
 use serde::Deserialize;
+use serde::Serialize;
 use serde_json::json;
 use std::sync::Arc;
 use std::time::Duration;
@@ -16,7 +17,7 @@ use tracing::instrument;
 use tracing::Level;
 use tracing::Span;
 
-#[derive(Deserialize, Debug, Eq, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq)]
 #[serde(rename_all = "camelCase")]
 /// The status of this authorization.
 ///
@@ -33,7 +34,7 @@ pub enum AuthorizationStatus {
 
 /// An autorization represents the server's authorization of a certain
 /// domain being represented by an account.
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Authorization {
   #[serde(skip)]
@@ -62,7 +63,7 @@ pub struct Authorization {
 /// The status of this challenge.
 ///
 /// Possible values are "pending", "processing", "valid", and "invalid".
-#[derive(Deserialize, Debug, Eq, PartialEq, Clone)]
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub enum ChallengeStatus {
   Pending,
@@ -75,7 +76,7 @@ pub enum ChallengeStatus {
 /// that an account has control over an identifier (domain).
 ///
 /// A challenge can only be acquired through an [`Authorization`].
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Challenge {
   #[serde(skip)]
